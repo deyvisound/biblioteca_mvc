@@ -1,0 +1,7 @@
+# ignore all logs
+*.log
+
+target\*
+.settings/
+.project
+
