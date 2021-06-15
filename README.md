@@ -8,7 +8,7 @@
 - JSTL
 - JSP
 - Padrão DAO
-- Um pouco de Reflection
+- Reflection
 
 O projeto utiliza um banco de dados fake(em memória) para falicitar o desenvolvimento e aplicação dos padrões. Porém, nada impede que seja adicionado um banco de dados posteriormente, pois este é justamente o intuito de nossa aplicação, que seja facilmente escalável. 
 
