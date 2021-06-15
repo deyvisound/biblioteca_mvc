@@ -3,7 +3,7 @@ package br.com.biblioteca.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.biblioteca.servlets.AppEnum;
+import br.com.biblioteca.arq.SessionParams;
 
 public abstract class AbstractController {
 
@@ -12,23 +12,46 @@ public abstract class AbstractController {
 	private boolean isForward;
 	private boolean isRedirect;
 
-	private String jspDestino;
+	private String forwardFile;
+	private String redirectURI;
 
 	public AbstractController() {
 		this.isForward = false;
 		this.isRedirect = false;
 	}
 
-	protected void setForward(String jspDestino) {
+	protected void setForward(String destino) {
 		this.isForward = true;
-		this.jspDestino = jspDestino + ".jsp";
+		this.forwardFile = destino + ".jsp";
 	}
 
-	protected void setRedirect(String jspDestino) {
+	protected void setRedirect(String destino) {
 		this.isRedirect = true;
-		this.jspDestino = jspDestino;
+		this.redirectURI = destino;
+	}
+	
+	public boolean isForward() {
+		return isForward;
 	}
 
+	public boolean isRedirect() {
+		return isRedirect;
+	}
+
+	public String getForwardFile() {
+		return "/WEB-INF/" + forwardFile;
+	}
+
+	public String getRedirectURI() {
+		String context = (String) this.request.getSession().getAttribute(SessionParams.CONTEXT_ROOT);
+		return "/" + context + redirectURI;
+	}
+
+	/**
+	 * 
+	 * @param classDao
+	 * @return
+	 */
 	protected <T> T getDao(Class<T> classDao) {
 		try {
 			return classDao.newInstance();
@@ -38,14 +61,18 @@ public abstract class AbstractController {
 		}
 	}
 
-	protected void setProximaAcao(String action) {
-		String controller = (String) this.request.getAttribute(AppEnum.CONTROLLER.toString());
-
-		this.setRequestAttribute("nextAction", "/" + controller + "/" + action);
+	/**
+	 * Set a ação que o formulário renderizado irá utilizar
+	 * 
+	 * @param action
+	 */
+	protected void setActionForm(String action) {
+		this.setRequestAttribute("nextAction", "/" + action);
 	}
-	
+
 	/**
 	 * Retorna um parâmetro dado seu nome
+	 * 
 	 * @param param
 	 * @return
 	 */
@@ -55,18 +82,6 @@ public abstract class AbstractController {
 
 	public void setRequestAndResponse(HttpServletRequest req, HttpServletResponse resp) {
 		this.request = req;
-	}
-
-	public String getJspDestino() {
-		return jspDestino;
-	}
-
-	public boolean isForward() {
-		return isForward;
-	}
-
-	public boolean isRedirect() {
-		return isRedirect;
 	}
 
 	public void setRequestAttribute(String key, Object value) {

@@ -1,4 +1,4 @@
-package br.com.biblioteca;
+package br.com.biblioteca.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,7 +23,7 @@ public class BibliotecaHelper {
 		return !BibliotecaHelper.isEmpty(o);
 	}
 
-	public static String wordToCamelCase(String word) {
+	public static String toCamelCase(String word) {
 		return word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
 	}
 

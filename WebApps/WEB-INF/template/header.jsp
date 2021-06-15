@@ -1,4 +1,3 @@
-<%@ page import="br.com.biblioteca.servlets.AppEnum"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -32,20 +31,20 @@
 	<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="<c:url value="/" />">${fn:toUpperCase(CONTEXT_ROOT)}</a>
+				<a class="navbar-brand" href="<c:url value="/" />">${fn:toUpperCase(context_root)}</a>
 			</div>
 			
 			<ul class="nav navbar-nav">
-				<li class="${empty CONTROLLER ? 'active' : '' }">
+				<li class="${empty current_controller ? 'active' : '' }">
 					<a href="<c:url value="/" />">Home</a>
 				</li>
-				<li class="${CONTROLLER == 'livro' ? 'active' : '' }">
+				<li class="${current_controller == 'livro' ? 'active' : '' }">
 					<a href="<c:url value="/livro/listar" />">Livros</a>
 				</li>
-				<li class="${CONTROLLER == 'autor' ? 'active' : '' }">
+				<li class="${current_controller == 'autor' ? 'active' : '' }">
 					<a href="<c:url value="/autor/listar" />">Autores</a>
 				</li>
-				<li class="${CONTROLLER == 'editora' ? 'active' : '' }">
+				<li class="${current_controller == 'editora' ? 'active' : '' }">
 					<a href="<c:url value="/editora/listar" />">Editoras</a>
 				</li>
 			</ul>
@@ -57,12 +56,12 @@
 		<div class="row">
 			<div class=" col-md-12 ">
 				<h4>
-					${CONTEXT_ROOT}
-					<c:if test="${not empty CONTROLLER}"> 
-							-> ${CONTROLLER} 
+					${context_root}
+					<c:if test="${not empty current_controller}"> 
+							-> ${current_controller} 
 						</c:if>
-					<c:if test="${not empty ACTION}">
-							-> ${ACTION}
+					<c:if test="${not empty current_action}">
+							-> ${current_action}
 						</c:if>
 					:
 				</h4>

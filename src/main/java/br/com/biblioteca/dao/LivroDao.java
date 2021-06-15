@@ -3,7 +3,7 @@ package br.com.biblioteca.dao;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import br.com.biblioteca.BancoDeDados;
+import br.com.biblioteca.arq.BancoDeDados;
 import br.com.biblioteca.modelo.Livro;
 
 public class LivroDao implements AbstractDao {

@@ -2,7 +2,7 @@ package br.com.biblioteca.dao;
 
 import java.util.Collection;
 
-import br.com.biblioteca.BancoDeDados;
+import br.com.biblioteca.arq.BancoDeDados;
 import br.com.biblioteca.modelo.Editora;
 
 public class EditoraDao implements AbstractDao {

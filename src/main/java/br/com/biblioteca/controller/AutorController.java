@@ -19,8 +19,7 @@ public class AutorController extends AbstractController {
 		Collection<Autor> autores = getDao(AutorDao.class).findAll();
 		setRequestAttribute("autores", autores);
 
-		setForward("listar");
-
+		setForward("autor/listar");
 	}
 
 	public void cadastrar() {
