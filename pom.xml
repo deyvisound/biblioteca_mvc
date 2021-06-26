@@ -14,7 +14,11 @@
 	</properties>
 
 	<build>
+
+		<finalName>biblioteca_mvc_${version}</finalName>
+
 		<plugins>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
@@ -22,6 +26,14 @@
 					<webXml>WebApps/WEB-INF/web.xml</webXml>
 				</configuration>
 			</plugin>
+
+			<!-- Relatório de Testes -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.8-SNAPSHOT</version>
+			</plugin>
+			
 		</plugins>
 	</build>
 
@@ -49,8 +61,6 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-
-
 
 	</dependencies>
 

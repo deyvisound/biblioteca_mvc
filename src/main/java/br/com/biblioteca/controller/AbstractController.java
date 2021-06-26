@@ -3,7 +3,7 @@ package br.com.biblioteca.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.biblioteca.arq.SessionParams;
+import br.com.biblioteca.arq.CurrentRequest;
 
 public abstract class AbstractController {
 
@@ -20,12 +20,12 @@ public abstract class AbstractController {
 		this.isRedirect = false;
 	}
 
-	protected void setForward(String destino) {
+	protected void forward(String destino) {
 		this.isForward = true;
 		this.forwardFile = destino + ".jsp";
 	}
 
-	protected void setRedirect(String destino) {
+	protected void redirect(String destino) {
 		this.isRedirect = true;
 		this.redirectURI = destino;
 	}
@@ -43,8 +43,7 @@ public abstract class AbstractController {
 	}
 
 	public String getRedirectURI() {
-		String context = (String) this.request.getSession().getAttribute(SessionParams.CONTEXT_ROOT);
-		return "/" + context + redirectURI;
+		return redirectURI;
 	}
 
 	/**
@@ -79,6 +78,10 @@ public abstract class AbstractController {
 	protected String getParam(String param) {
 		return this.request.getParameter(param);
 	}
+	
+	protected Object getSessionAtribute(String attrName) {
+		return this.request.getSession().getAttribute(attrName);
+	}
 
 	public void setRequestAndResponse(HttpServletRequest req, HttpServletResponse resp) {
 		this.request = req;
@@ -86,6 +89,10 @@ public abstract class AbstractController {
 
 	public void setRequestAttribute(String key, Object value) {
 		request.setAttribute(key, value);
+	}
+	
+	public void setSessionAttribute(String key, Object value) {
+		request.getSession().setAttribute(key, value);
 	}
 
 }

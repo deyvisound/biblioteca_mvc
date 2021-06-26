@@ -10,6 +10,7 @@ import br.com.biblioteca.modelo.Autor;
 import br.com.biblioteca.modelo.Editora;
 import br.com.biblioteca.modelo.Endereco;
 import br.com.biblioteca.modelo.Livro;
+import br.com.biblioteca.modelo.Usuario;
 
 /**
  * Classe que simula o banco de dados
@@ -25,6 +26,7 @@ public class BancoDeDados {
 	public static Map<Integer, Livro> livros;
 	public static Map<Integer, Autor> autores;
 	public static Map<Integer, Endereco> enderecos;
+	public static Map<Integer, Usuario> usuarios;
 
 	
 	
@@ -67,7 +69,10 @@ public class BancoDeDados {
 	public static Collection<Livro> getAllLivros() {
 		return livros.values();
 	}
-
+	
+	public static void deletarLivro(Integer idLivro) {
+		livros.remove(idLivro);
+	}
 	
 	
 	/**
@@ -109,9 +114,35 @@ public class BancoDeDados {
 		return editoras.get(id);
 	}
 	
-
+	
 	/**
+	 * #########################################   Usuários
 	 * 
+	 */
+	public static void cadastrarUsuario(Usuario usuario) {
+		if (usuarios == null)
+			usuarios = new HashMap<>();
+
+		usuario.setId(chavePrimaria++);
+		usuarios.put(usuario.getId(), usuario);
+	}
+
+	public static Usuario findUserByLoginAndPass(String login, String senha) {
+		for(Integer idUser : usuarios.keySet()) {
+			Usuario usuario = usuarios.get(idUser);
+			
+			if(usuario.getLogin().equals(login) && usuario.getSenha().equals(senha))
+				return usuario;
+		}
+		
+		return null;
+	}
+	
+
+	
+	
+	/**
+	 * Iniciando banco de dados 
 	 * @throws ParseException
 	 */
 	public void popularBanco() throws ParseException {
@@ -144,7 +175,14 @@ public class BancoDeDados {
 		livro.setDataPublicacao(format.parse("23/11/2005"));
 		livro.setAutor(autor);
 		livro.setEditora(editora);
+		
+		Usuario usuario = new Usuario();
+		usuario.setLogin("admin");
+		usuario.setSenha("admin");
+		usuario.setNome("Administrador do Sistema"); 		
+		
 
+		BancoDeDados.cadastrarUsuario(usuario);
 		BancoDeDados.cadastrarLivro(livro);
 		BancoDeDados.cadastrarAutor(autor);
 		BancoDeDados.cadastrarEditora(editora);

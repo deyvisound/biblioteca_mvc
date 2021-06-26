@@ -19,7 +19,7 @@ public class EditoraController extends AbstractController {
 		Collection<Editora> editoras = getDao(EditoraDao.class).findAll();
 		setRequestAttribute("editoras", editoras);
 
-		setForward("editora/listar");
+		forward("editora/listar");
 
 	}
 

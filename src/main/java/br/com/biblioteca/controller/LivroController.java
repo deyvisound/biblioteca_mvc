@@ -3,6 +3,7 @@ package br.com.biblioteca.controller;
 import java.text.ParseException;
 import java.util.Collection;
 
+import br.com.biblioteca.arq.CurrentRequest;
 import br.com.biblioteca.dao.AutorDao;
 import br.com.biblioteca.dao.EditoraDao;
 import br.com.biblioteca.dao.LivroDao;
@@ -24,7 +25,7 @@ public class LivroController extends AbstractController {
 		Collection<Livro> livros = getDao(LivroDao.class).findAll();
 		setRequestAttribute("livros", livros);
 
-		setForward("livro/listar");
+		forward("livro/listar");
 
 	}
 
@@ -42,7 +43,7 @@ public class LivroController extends AbstractController {
 		setRequestAttribute("editoras", editoras);
 
 		setActionForm("livro/salvar");
-		setForward("livro/cadastrar");
+		forward("livro/cadastrar");
 	}
 
 	public void salvar() throws ParseException {
@@ -59,7 +60,12 @@ public class LivroController extends AbstractController {
 
 		getDao(LivroDao.class).salvar(obj);
 		
-		setRedirect("livro/listar");
+		redirect("livro/listar");
+	}
+	
+	public void remover() {
+		// TODO: implementar
+		//getDao(LivroDao.class).remover( Integer.valueOf((String) getSessionAtribute(CurrentRequest.ENTITY_ID)) );
 	}
 
 }

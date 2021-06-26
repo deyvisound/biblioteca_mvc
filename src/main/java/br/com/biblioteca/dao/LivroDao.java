@@ -21,4 +21,8 @@ public class LivroDao implements AbstractDao {
 		BancoDeDados.cadastrarLivro(livro);
 	}
 
+	public void remover(Integer id) {
+		BancoDeDados.deletarLivro(id);
+	}
+
 }
