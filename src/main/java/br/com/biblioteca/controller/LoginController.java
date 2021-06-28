@@ -10,6 +10,11 @@ public class LoginController extends AbstractController {
 	public void loginForm() {		
 		redirect("public/login/login.jsp");		
 	}
+	
+	public void logout() {
+		destroySessionAttribute("user");
+		redirect("login");
+	}
 
 	public void logon() {
 
@@ -40,7 +45,7 @@ public class LoginController extends AbstractController {
 			}
 		}
 		
-		forward("login");
+		redirect("login");
 	}
 
 }

@@ -15,6 +15,17 @@ public class Livro implements Serializable {
 	private Autor autor;
 	private Date dataPublicacao;
 
+	public Livro() {
+
+	}
+
+	public Livro(Integer entityId) {
+		if(entityId != null)
+			this.id = entityId;
+		else
+			this.id = 0;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -62,10 +73,10 @@ public class Livro implements Serializable {
 	public void setDataPublicacao(Date dataPublicacao) {
 		this.dataPublicacao = dataPublicacao;
 	}
-	
+
 	@Transient
 	private void validate() {
-		
+
 	}
 
 	@Override

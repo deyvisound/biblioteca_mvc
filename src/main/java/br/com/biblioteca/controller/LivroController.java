@@ -3,7 +3,6 @@ package br.com.biblioteca.controller;
 import java.text.ParseException;
 import java.util.Collection;
 
-import br.com.biblioteca.arq.CurrentRequest;
 import br.com.biblioteca.dao.AutorDao;
 import br.com.biblioteca.dao.EditoraDao;
 import br.com.biblioteca.dao.LivroDao;
@@ -29,6 +28,9 @@ public class LivroController extends AbstractController {
 
 	}
 
+	/**
+	 * Direciona o usuário ao formulário de cadastro de livro
+	 */
 	public void cadastrar() {
 
 		Livro livro = new Livro();
@@ -45,27 +47,49 @@ public class LivroController extends AbstractController {
 		setActionForm("livro/salvar");
 		forward("livro/cadastrar");
 	}
+	
+	/**
+	 * Direciona o usuário ao formulário de cadastro de livro
+	 */
+	public void editar() {
 
+		Livro livro = getDao(LivroDao.class).find( getCurrentRequestObj().getEntityId());
+
+		Collection<Autor> autores = getDao(AutorDao.class).findAll();
+		Collection<Editora> editoras = getDao(EditoraDao.class).findAll();
+
+		setRequestAttribute("livro", livro);
+		setRequestAttribute("autores", autores);
+		setRequestAttribute("editoras", editoras);
+
+		setActionForm("livro/salvar/" + livro.getId());
+		forward("livro/cadastrar");
+	}
+
+	/**
+	 * Salva novo livro no banco de dados
+	 * @throws ParseException
+	 */
 	public void salvar() throws ParseException {
 
 		Autor autor = getDao(AutorDao.class).find(Integer.valueOf(getParam("id_autor")));
 		Editora editora = getDao(EditoraDao.class).find(Integer.valueOf(getParam("id_editora")));
 
-		obj = new Livro();
+		obj = new Livro(getCurrentRequestObj().getEntityId());
 		obj.setTitulo(getParam("titulo"));
 		obj.setAssunto(getParam("assunto"));
 		obj.setDataPublicacao(BibliotecaHelper.getDateFromString(getParam("dataPublicacao")));
 		obj.setAutor(autor);
 		obj.setEditora(editora);
 
-		getDao(LivroDao.class).salvar(obj);
-		
+		getDao(LivroDao.class).merge(obj);
+
 		redirect("livro/listar");
 	}
-	
+
 	public void remover() {
-		// TODO: implementar
-		//getDao(LivroDao.class).remover( Integer.valueOf((String) getSessionAtribute(CurrentRequest.ENTITY_ID)) );
+		getDao(LivroDao.class).remover( getCurrentRequestObj().getEntityId() );
+		redirect("livro/listar");
 	}
 
 }

@@ -71,8 +71,11 @@ public class CurrentRequest {
 		return action;
 	}
 
-	public String getEntityId() {
-		return entityId;
+	public Integer getEntityId() {
+		if(entityId != null)
+			return Integer.valueOf(entityId);
+					
+		return null;
 	}
 
 	public boolean isAllowedAccess() {

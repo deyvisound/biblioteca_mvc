@@ -15,9 +15,7 @@ public class AutorController extends AbstractController {
 	}
 
 	public void listar() {
-
-		Collection<Autor> autores = getDao(AutorDao.class).findAll();
-		setRequestAttribute("autores", autores);
+		setRequestAttribute("autores", buscarTodosAutores());
 
 		forward("autor/listar");
 	}
@@ -30,4 +28,7 @@ public class AutorController extends AbstractController {
 
 	}
 
+	public Collection<Autor> buscarTodosAutores() {
+		return getDao(AutorDao.class).findAll();
+	}
 }

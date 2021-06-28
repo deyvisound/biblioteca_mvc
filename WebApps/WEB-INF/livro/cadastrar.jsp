@@ -1,11 +1,8 @@
-<jsp:include page="../template/header.jsp" />
-
-<%-- importamos aqui só pra ter o autocomplete e sumir o warning --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="../template/header.jsp"%>
 
 <div class="container">
 
-	<form method="POST" action="<c:url value="${nextAction}" />"  >
+	<form method="POST" action="<c:url value="${nextAction}" />"  >		
 		
 		<div class="form-group">
 			
@@ -53,7 +50,8 @@
 		<div class="form-group">
 			
 			<label for="dataPublicacao">Data Publicação: </label> 
-			<input type="text" class="form-control datepicker" name="dataPublicacao" id="dataPublicacao" placeholder="dd/mm/yyyy" value="${livro.assunto}" />
+			<input type="text" class="form-control datepicker" name="dataPublicacao" 
+				id="dataPublicacao" placeholder="dd/mm/yyyy" value="<fmt:formatDate pattern = "dd/MM/yyyy" value = "${livro.dataPublicacao}" />" />
 				
 		</div>
 		
@@ -65,5 +63,4 @@
 	</form>
 </div>
 
-
-<jsp:include page="../template/footer.jsp" />
+<%@ include file="../template/footer.jsp"%>

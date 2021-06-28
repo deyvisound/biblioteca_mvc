@@ -1,6 +1,9 @@
 <%@ include file="../template/header.jsp"%>
 
 <div class="container">
+
+	<a class="pull-right btn btn-success" href="/${ctx}/${controller}/cadastrar">Novo Livro</a>
+	
 	<table class="table">
 		<thead>
 			<tr>

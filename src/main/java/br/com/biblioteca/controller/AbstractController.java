@@ -29,7 +29,7 @@ public abstract class AbstractController {
 		this.isRedirect = true;
 		this.redirectURI = destino;
 	}
-	
+
 	public boolean isForward() {
 		return isForward;
 	}
@@ -78,7 +78,7 @@ public abstract class AbstractController {
 	protected String getParam(String param) {
 		return this.request.getParameter(param);
 	}
-	
+
 	protected Object getSessionAtribute(String attrName) {
 		return this.request.getSession().getAttribute(attrName);
 	}
@@ -90,9 +90,17 @@ public abstract class AbstractController {
 	public void setRequestAttribute(String key, Object value) {
 		request.setAttribute(key, value);
 	}
-	
-	public void setSessionAttribute(String key, Object value) {
+
+	protected void setSessionAttribute(String key, Object value) {
 		request.getSession().setAttribute(key, value);
+	}
+
+	protected void destroySessionAttribute(String key) {
+		request.getSession().removeAttribute(key);
+	}
+	
+	protected CurrentRequest getCurrentRequestObj() {
+		return (CurrentRequest) this.request.getAttribute("currentRequestObj");
 	}
 
 }

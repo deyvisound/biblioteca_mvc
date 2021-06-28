@@ -1,6 +1,5 @@
 package br.com.biblioteca.dao;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import br.com.biblioteca.arq.BancoDeDados;
@@ -13,16 +12,28 @@ public class LivroDao implements AbstractDao {
 		return BancoDeDados.getAllLivros();
 	}
 
-	public Collection<Integer> findteste() {
-		return new ArrayList<Integer>();
+	public Livro find(Integer id) {
+		return BancoDeDados.findLivroById(id);
+	}
+
+	public void merge(Livro livro) {
+		if (livro.getId() <= 0)
+			this.salvar(livro);
+		else
+			this.atualizar(livro);
 	}
 
 	public void salvar(Livro livro) {
 		BancoDeDados.cadastrarLivro(livro);
 	}
 
-	public void remover(Integer id) {
-		BancoDeDados.deletarLivro(id);
+	public void atualizar(Livro livro) {
+		BancoDeDados.deletarLivro(livro.getId());
+		BancoDeDados.cadastrarLivro(livro);
+	}
+
+	public void remover(Integer integer) {
+		BancoDeDados.deletarLivro(integer);
 	}
 
 }

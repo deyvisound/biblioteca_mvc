@@ -39,7 +39,9 @@ public class BancoDeDados {
 		if (autores == null)
 			autores = new HashMap<>();
 
-		autor.setId(chavePrimaria++);
+		if(autor.getId() <= 0)
+			autor.setId(chavePrimaria++);
+		
 		autores.put(autor.getId(), autor);
 	}
 
@@ -62,7 +64,9 @@ public class BancoDeDados {
 		if (livros == null)
 			livros = new HashMap<>();
 
-		livro.setId(chavePrimaria++);
+		if(livro.getId() <= 0)
+			livro.setId(chavePrimaria++);
+		
 		livros.put(livro.getId(), livro);
 	}
 
@@ -74,6 +78,9 @@ public class BancoDeDados {
 		livros.remove(idLivro);
 	}
 	
+	public static Livro findLivroById(Integer id) {
+		return livros.get(id);
+	}
 	
 	/**
 	 * ######################################## Endereço
@@ -84,7 +91,9 @@ public class BancoDeDados {
 		if (enderecos == null)
 			enderecos = new HashMap<>();
 
-		endereco.setId(chavePrimaria++);
+		if(endereco.getId() <= 0)
+			endereco.setId(chavePrimaria++);
+		
 		enderecos.put(endereco.getId(), endereco);
 	}
 	
@@ -102,7 +111,9 @@ public class BancoDeDados {
 		if (editoras == null)
 			editoras = new HashMap<>();
 
-		editora.setId(chavePrimaria++);
+		if(editora.getId() <= 0)
+			editora.setId(chavePrimaria++);
+		
 		editoras.put(editora.getId(), editora);
 	}
 	
@@ -123,7 +134,9 @@ public class BancoDeDados {
 		if (usuarios == null)
 			usuarios = new HashMap<>();
 
-		usuario.setId(chavePrimaria++);
+		if(usuario.getId() <= 0)
+			usuario.setId(chavePrimaria++);
+		
 		usuarios.put(usuario.getId(), usuario);
 	}
 
@@ -190,4 +203,5 @@ public class BancoDeDados {
 		BancoDeDados.cadastrarEndereco(enderecoEditora);
 
 	}
+	
 }
