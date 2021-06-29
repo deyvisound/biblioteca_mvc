@@ -10,7 +10,7 @@ public class Endereco implements Serializable {
 	private String rua;
 	private String bairro;
 	private String cidade;
-	private String UF;
+	private String uf;
 
 	public int getId() {
 		return id;
@@ -44,17 +44,17 @@ public class Endereco implements Serializable {
 		this.cidade = cidade;
 	}
 
-	public String getUF() {
-		return UF;
+	public String getUf() {
+		return uf;
 	}
 
 	public void setUF(String uF) {
-		UF = uF;
+		uf = uF;
 	}
 	
 	@Override
 	public String toString() {
-		return getRua()+", "+getBairro()+", "+getCidade()+"/"+getUF();
+		return getRua()+", "+getBairro()+", "+getCidade()+"/"+getUf();
 	}
 
 }

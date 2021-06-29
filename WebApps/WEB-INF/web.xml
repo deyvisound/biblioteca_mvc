@@ -14,6 +14,15 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
+
+	<!-- Tdl functions -->
+	<jsp-config>
+		<taglib>
+			<taglib-uri>http://tdl_functions/functions</taglib-uri>
+			<taglib-location>/WEB-INF/tdl_functions/functions.tdl</taglib-location>
+		</taglib>
+	</jsp-config>
+	
 	
 	
 	<!-- Filtro de Login -->

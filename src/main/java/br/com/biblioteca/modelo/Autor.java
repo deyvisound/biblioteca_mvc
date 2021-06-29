@@ -10,6 +10,15 @@ public class Autor implements Serializable {
 	private String nome;
 	private Endereco endereco;
 
+	public Autor(Integer autorId) {
+		if(autorId != null)
+			this.id = autorId;
+	}
+
+	public Autor() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getId() {
 		return id;
 	}

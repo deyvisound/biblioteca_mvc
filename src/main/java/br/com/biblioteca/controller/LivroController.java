@@ -53,7 +53,7 @@ public class LivroController extends AbstractController {
 	 */
 	public void editar() {
 
-		Livro livro = getDao(LivroDao.class).find( getCurrentRequestObj().getEntityId());
+		Livro livro = getDao(LivroDao.class).find(getCurrentRequestObj().getEntityId());
 
 		Collection<Autor> autores = getDao(AutorDao.class).findAll();
 		Collection<Editora> editoras = getDao(EditoraDao.class).findAll();

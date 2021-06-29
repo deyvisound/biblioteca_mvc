@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://tdl_functions/functions" prefix="cf"%>
 
 
 <!DOCTYPE html>
@@ -11,7 +11,6 @@
 	<head>
 	
 		<title>Biblioteca MVC</title>
-		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -71,4 +70,13 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class=" col-md-12 ">
+										
+					<c:if test="${action eq 'listar'}">
+						<br/>
+						<div class="container">
+							<a class="pull-right btn btn-success" href="/${ctx}/${controller}/cadastrar">Novo ${cf:toCamelCase( controller )}</a>
+						</div>
+					</c:if>
+					
+					
 					

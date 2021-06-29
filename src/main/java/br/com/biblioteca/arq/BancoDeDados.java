@@ -53,6 +53,9 @@ public class BancoDeDados {
 		return autores.get(id);
 	}
 
+	public static void deletarAutor(Integer idAutor) {
+		autores.remove(idAutor);
+	}
 	
 	
 	/**
@@ -101,6 +104,13 @@ public class BancoDeDados {
 		return enderecos.values();
 	}
 
+	public static void deletarEndereco(Integer idEndereco) {
+		enderecos.remove(idEndereco);
+	}
+	
+	public static Endereco findEnderecoById(Integer id) {
+		return enderecos.get(id);
+	}
 	
 	/**
 	 * ####################################### Editora
@@ -203,5 +213,7 @@ public class BancoDeDados {
 		BancoDeDados.cadastrarEndereco(enderecoEditora);
 
 	}
+
+	
 	
 }
