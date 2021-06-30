@@ -1,10 +1,5 @@
 package br.com.biblioteca.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import br.com.biblioteca.modelo.Usuario;
-
 public class LoginController extends AbstractController {
 	
 	public void loginForm() {		
@@ -12,7 +7,7 @@ public class LoginController extends AbstractController {
 	}
 	
 	public void logout() {
-		destroySessionAttribute("user");
+		destroySessionAttribute("usuarioLogado");
 		redirect("login");
 	}
 
@@ -21,27 +16,24 @@ public class LoginController extends AbstractController {
 		String login = getParam("login");
 		String password = getParam("password");
 
-		Map<String, String> messages = new HashMap<String, String>();
-
 		if (login == null || login.isEmpty()) {
-			messages.put("username", "Please enter username");
+			addErrorMenssage("Please enter username");
 		}
 
 		if (password == null || password.isEmpty()) {
-			messages.put("password", "Please enter password");
+			addErrorMenssage("Please enter password");
 		}
 
-		if (messages.isEmpty()) {
+		if (!hasErrors()) {
 			UsuarioController usuarioController = new UsuarioController();
-			Usuario user = usuarioController.validarLoginUsuario(login, password);
 
-			if (user != null) {
-				setSessionAttribute("user", user);
+			if (usuarioController.isUsuarioValido(login, password)) {
+				setSessionAttribute("usuarioLogado", usuarioController.buscarPorLoginSenha(login, password));
 				redirect("");
 				
 				return;
 			} else {
-				messages.put("login", "Unknown login, please try again");
+				addErrorMenssage("Unknown login, please try again");
 			}
 		}
 		

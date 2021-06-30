@@ -1,4 +1,4 @@
-package br.com.biblioteca.arq;
+package br.com.biblioteca.filter;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -13,10 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import br.com.biblioteca.arq.BancoDeDados;
+import br.com.biblioteca.arq.CurrentRequest;
+
 /**
  * Servlet Filter implementation class AppLoginFilter
  */
-public class AppLoginFilter implements Filter {
+public class LoginFilter implements Filter {
 
 	private String[] urlPermitidaArray;
 	
@@ -44,7 +47,7 @@ public class AppLoginFilter implements Filter {
 		HttpSession session = request.getSession(false);
 		String loginPath = request.getContextPath() + "/login";		
 
-		boolean loggedIn = session != null && session.getAttribute("user") != null;
+		boolean loggedIn = session != null && session.getAttribute("usuarioLogado") != null;
 		boolean loginRequest = (request.getRequestURI().indexOf(loginPath) >= 0);
 		
 		CurrentRequest currentRequest = new CurrentRequest(request.getRequestURI(), urlPermitidaArray);		

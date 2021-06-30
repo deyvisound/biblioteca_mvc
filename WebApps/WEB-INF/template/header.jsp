@@ -60,6 +60,7 @@
 						<a href="<c:url value="/editora/listar" />">Editoras</a>
 					</li>
 					<li style="float: right; align-items: righ;" >
+						<span> ${usuarioLogado.nome} </span>
 						<a href="<c:url value="login/logout" />" >Sair</a>
 					</li>
 				</ul>
@@ -68,6 +69,10 @@
 		</nav>
 	
 		<div class="container-fluid">
+			
+			<%-- Possíveis mensagens de error ou aviso --%>
+			<%@ include file="mensagens.jsp"%>
+			
 			<div class="row">
 				<div class=" col-md-12 ">
 										

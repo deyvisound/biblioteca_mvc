@@ -1,9 +1,13 @@
 package br.com.biblioteca.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.biblioteca.arq.CurrentRequest;
+import br.com.biblioteca.arq.ListaMensagens;
 
 public abstract class AbstractController {
 
@@ -98,9 +102,44 @@ public abstract class AbstractController {
 	protected void destroySessionAttribute(String key) {
 		request.getSession().removeAttribute(key);
 	}
-	
+
 	protected CurrentRequest getCurrentRequestObj() {
 		return (CurrentRequest) this.request.getAttribute("currentRequestObj");
+	}
+	
+	/**
+	 * @param message
+	 */
+	@SuppressWarnings("unchecked")
+	protected void addErrorMenssage(String message) {
+		
+		Object listaMensagensObject = getSessionAtribute("lista_mensagens");
+		List<ListaMensagens> listaMensagens;
+		
+		if(listaMensagensObject != null)
+			listaMensagens = (List<ListaMensagens>) listaMensagensObject;
+		else
+			listaMensagens = new ArrayList<ListaMensagens>();
+		
+		listaMensagens.add( new ListaMensagens(ListaMensagens.ERROR, message) );
+		setSessionAttribute("lista_mensagens", listaMensagens);
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected boolean hasErrors() {
+		Object listaMensagensObject = getSessionAtribute("listaMensagens");
+		List<ListaMensagens> listaMensagens;
+		
+		if(listaMensagensObject == null)
+			return false;
+		else
+			listaMensagens = (List<ListaMensagens>) listaMensagensObject;
+		
+		for(ListaMensagens lm : listaMensagens)
+			if(lm.isError())
+				return true;
+		
+		return false;				
 	}
 
 }

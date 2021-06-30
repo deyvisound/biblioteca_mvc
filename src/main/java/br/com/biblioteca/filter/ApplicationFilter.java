@@ -1,4 +1,4 @@
-package br.com.biblioteca.arq;
+package br.com.biblioteca.filter;
 
 import java.io.IOException;
 
@@ -11,6 +11,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.biblioteca.arq.CurrentRequest;
+import br.com.biblioteca.arq.Reflection;
 import br.com.biblioteca.exception.BibliotecaException;
 import br.com.biblioteca.utils.BibliotecaHelper;
 
