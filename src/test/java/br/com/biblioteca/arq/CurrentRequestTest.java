@@ -1,14 +1,14 @@
 package br.com.biblioteca.arq;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-class CurrentRequestTest {
+public class CurrentRequestTest {
 
 	@Test
-	void contextoTemQueSerBibliotecaQuandoAcessandoRaizDaAplicacao() {
+	public void contextoTemQueSerBibliotecaQuandoAcessandoRaizDaAplicacao() {
 		String uri = "/biblioteca/";
 		CurrentRequest cr = new CurrentRequest(uri, new String[] { "public", "index.jsp" });
 
@@ -16,7 +16,7 @@ class CurrentRequestTest {
 	}
 
 	@Test
-	void controllerTemQueSerSegundoElementoDaURI() {
+	public void controllerTemQueSerSegundoElementoDaURI() {
 		String segundoElemento = "livro";
 		String uri = "/biblioteca/" + segundoElemento;
 		CurrentRequest cr = new CurrentRequest(uri, new String[] { "public", "index.jsp" });
@@ -25,7 +25,7 @@ class CurrentRequestTest {
 	}
 
 	@Test
-	void ActionTemQueSerTerceiroElementoDaURI() {
+	public void ActionTemQueSerTerceiroElementoDaURI() {
 		String segundoElemento = "livro";
 		String terceiroElemento = "cadastrar";
 		String uri = "/biblioteca/" + segundoElemento + "/" + terceiroElemento;
@@ -36,7 +36,7 @@ class CurrentRequestTest {
 	}
 
 	@Test
-	void EntityIdTemQueSerQuartElementoDaURI() {
+	public void EntityIdTemQueSerQuartElementoDaURI() {
 		String segundoElemento = "livro";
 		String terceiroElemento = "editar";
 		String quartoElemento = "356";
@@ -49,7 +49,7 @@ class CurrentRequestTest {
 	}
 
 	@Test
-	void todosOsOutrosMembrosDaURITemQueSeremNulosQuandoNaoInformados() {
+	public void todosOsOutrosMembrosDaURITemQueSeremNulosQuandoNaoInformados() {
 		String uri = "/biblioteca/";
 		CurrentRequest cr = new CurrentRequest(uri, new String[] { "public", "index.jsp" });
 
@@ -59,7 +59,7 @@ class CurrentRequestTest {
 	}
 
 	@Test
-	void todosOsOutrosMembrosDaURITemQueSeremNulosQuandoAcessandoURLPublica() {
+	public void todosOsOutrosMembrosDaURITemQueSeremNulosQuandoAcessandoURLPublica() {
 		String uri = "/biblioteca/index.jsp";
 		CurrentRequest cr = new CurrentRequest(uri, new String[] { "public", "index.jsp" });
 
@@ -79,7 +79,7 @@ class CurrentRequestTest {
 	}
 
 	@Test
-	void parametrosNaURINaoDevemInterferirNoRoteamento() {
+	public void parametrosNaURINaoDevemInterferirNoRoteamento() {
 		String segundoElemento = "livro";
 		String terceiroElemento = "editar";		
 
