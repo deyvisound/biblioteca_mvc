@@ -16,4 +16,24 @@ public class EditoraDao implements AbstractDao {
 		return BancoDeDados.findEditoraById(id);
 	}
 
+	public void salvar(Editora editora) {
+		BancoDeDados.cadastrarEditora(editora);
+	}
+
+	private void atualizar(Editora editora) {
+		remover(editora.getId());
+		salvar(editora);
+	}
+
+	public void merge(Editora editora) {
+		if (editora.getId() <= 0)
+			this.salvar(editora);
+		else
+			this.atualizar(editora);
+	}
+
+	public void remover(int idEditora) {
+		BancoDeDados.deletarEditora(idEditora);
+	}
+
 }

@@ -2,6 +2,8 @@ package br.com.biblioteca.modelo;
 
 import java.io.Serializable;
 
+import br.com.biblioteca.utils.BibliotecaHelper;
+
 public class Editora implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -9,6 +11,15 @@ public class Editora implements Serializable {
 	private int id;
 	private String nome;
 	private Endereco endereco;
+	
+	public Editora() {
+		
+	}
+
+	public Editora(Integer idEditora) {
+		if(!BibliotecaHelper.isEmpty(idEditora))
+			this.setId(idEditora);
+	}
 
 	public int getId() {
 		return id;

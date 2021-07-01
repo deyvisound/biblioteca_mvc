@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.util.Collection;
 
 import br.com.biblioteca.dao.AutorDao;
-import br.com.biblioteca.dao.EnderecoDao;
 import br.com.biblioteca.modelo.Autor;
 import br.com.biblioteca.modelo.Endereco;
 import br.com.biblioteca.modelo.Estado;
@@ -37,10 +36,8 @@ public class AutorController extends AbstractController {
 	public void editar() {
 
 		Autor autor = getDao(AutorDao.class).find(getCurrentRequestObj().getEntityId());
-		Endereco endereco = getDao(EnderecoDao.class).find(autor.getEndereco().getId());
 
 		setRequestAttribute("autor", autor);
-		setRequestAttribute("endereco", endereco);
 		setRequestAttribute("UFs", Estado.getAll());
 
 		setActionForm("autor/salvar/" + autor.getId());

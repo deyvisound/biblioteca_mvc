@@ -135,6 +135,11 @@ public class BancoDeDados {
 		return editoras.get(id);
 	}
 	
+	public static void deletarEditora(Integer idEditora) {
+		editoras.remove(idEditora);
+	}
+	
+	
 	
 	/**
 	 * #########################################   Usuários
@@ -214,6 +219,4 @@ public class BancoDeDados {
 
 	}
 
-	
-	
 }

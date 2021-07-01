@@ -9,7 +9,7 @@
 		<div class="form-group">
 			
 			<label for="nome">Nome: </label> 
-			<input type="text" class="form-control" name="nome" id="nome" placeholder="Nome Completo do Autor" value="${autor.nome}" />
+			<input type="text" class="form-control" name="nome" id="nome" placeholder="Nome da Editora" value="${editora.nome}" />
 				
 		</div>			
 		
@@ -22,21 +22,21 @@
 		<div class="form-group">
 			
 			<label for="rua">Logradouro: </label> 
-			<input type="text" class="form-control" name="rua" id="rua" placeholder="Logradouro ex. Rua, Avenida, Alameda..." value="${autor.endereco.rua}" />
+			<input type="text" class="form-control" name="rua" id="rua" placeholder="Logradouro ex. Rua, Avenida, Alameda..." value="${editora.endereco.rua}" />
 				
 		</div>
 		
 		<div class="form-group">
 			
 			<label for="bairro">Bairro: </label> 
-			<input type="text" class="form-control" name="bairro" id="bairro" placeholder="Bairro" value="${autor.endereco.bairro}" />
+			<input type="text" class="form-control" name="bairro" id="bairro" placeholder="Bairro" value="${editora.endereco.bairro}" />
 				
 		</div>
 		
 		<div class="form-group">
 			
 			<label for="bairro">Cidade: </label> 
-			<input type="text" class="form-control" name="cidade" id="cidade" placeholder="Cidade" value="${autor.endereco.cidade}" />
+			<input type="text" class="form-control" name="cidade" id="cidade" placeholder="Cidade" value="${editora.endereco.cidade}" />
 				
 		</div>
 		
@@ -46,7 +46,7 @@
 			<select name="uf" class="form-control" id="uf">
 				<option value="-1"> -- Selecione -- </option>			
 				<c:forEach var="uf" items="${UFs}">
-					<option value="${uf.sigla}" ${autor.endereco.uf == uf.sigla ? "selected" : "" } >
+					<option value="${uf.sigla}" ${editora.endereco.uf == uf.sigla ? "selected" : "" } >
 						${uf.nome}
 					</option>
 				</c:forEach>
