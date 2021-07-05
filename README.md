@@ -1,13 +1,13 @@
 # Biblioteca MVC
 
-## Projeto que tem por finalidade colocar em prática a arquitetura MVC. 
+## Projeto que tem por finalidade exercitar e aprender práticas e tecnologias utilizando JAVA.
 
 **No projeto, podemos verificar a utilização de:** 
 - Servlets 
 - Filtros
 - JSTL
 - JSP
-- Padrão DAO
+- Arquitetura MVC, Padrão DAO, Pattern Singleton
 - Reflection
 - Testes Unitários
 
