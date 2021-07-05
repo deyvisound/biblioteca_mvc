@@ -2,18 +2,17 @@ package br.com.biblioteca.dao;
 
 import java.util.Collection;
 
-import br.com.biblioteca.arq.BancoDeDados;
+import br.com.biblioteca.exception.BibliotecaException;
 import br.com.biblioteca.modelo.Livro;
 
-public class LivroDao implements AbstractDao {
+public class LivroDao extends AbstractDao {
 
-	@SuppressWarnings("unchecked")
 	public Collection<Livro> findAll() {
-		return BancoDeDados.getAllLivros();
+		return getDataBase().getAllLivros();
 	}
 
-	public Livro find(Integer id) {
-		return BancoDeDados.findLivroById(id);
+	public Livro find(Integer id) throws BibliotecaException {
+		return findByPrimaryKey(Livro.class, id);
 	}
 
 	public void merge(Livro livro) {
@@ -24,16 +23,16 @@ public class LivroDao implements AbstractDao {
 	}
 
 	public void salvar(Livro livro) {
-		BancoDeDados.cadastrarLivro(livro);
+		getDataBase().cadastrarLivro(livro);
 	}
 
 	public void atualizar(Livro livro) {
-		BancoDeDados.deletarLivro(livro.getId());
-		BancoDeDados.cadastrarLivro(livro);
+		getDataBase().deletarLivro(livro.getId());
+		getDataBase().cadastrarLivro(livro);
 	}
 
 	public void remover(Integer integer) {
-		BancoDeDados.deletarLivro(integer);
+		getDataBase().deletarLivro(integer);
 	}
 
 }

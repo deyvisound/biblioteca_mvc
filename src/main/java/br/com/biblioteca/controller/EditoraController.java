@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.Collection;
 
 import br.com.biblioteca.dao.EditoraDao;
+import br.com.biblioteca.exception.BibliotecaException;
 import br.com.biblioteca.modelo.Editora;
 import br.com.biblioteca.modelo.Endereco;
 import br.com.biblioteca.modelo.Estado;
@@ -36,7 +37,7 @@ public class EditoraController extends AbstractController {
 
 	}
 
-	public void editar() {
+	public void editar() throws BibliotecaException {
 
 		Editora editora = getDao(EditoraDao.class).find(getCurrentRequestObj().getEntityId());
 

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import br.com.biblioteca.arq.BancoDeDados;
+import br.com.biblioteca.arq.DateBaseDriver;
 import br.com.biblioteca.arq.CurrentRequest;
 
 /**
@@ -29,7 +29,7 @@ public class LoginFilter implements Filter {
 	public void init(FilterConfig fConfig) throws ServletException {
 		try {
 			urlPermitidaArray = fConfig.getInitParameter("urlPublica").split(",");
-			(new BancoDeDados()).popularBanco();
+			DateBaseDriver.getInstance().popularBanco();
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

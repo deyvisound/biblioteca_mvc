@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.Collection;
 
 import br.com.biblioteca.dao.AutorDao;
+import br.com.biblioteca.exception.BibliotecaException;
 import br.com.biblioteca.modelo.Autor;
 import br.com.biblioteca.modelo.Endereco;
 import br.com.biblioteca.modelo.Estado;
@@ -33,7 +34,7 @@ public class AutorController extends AbstractController {
 
 	}
 
-	public void editar() {
+	public void editar() throws BibliotecaException {
 
 		Autor autor = getDao(AutorDao.class).find(getCurrentRequestObj().getEntityId());
 

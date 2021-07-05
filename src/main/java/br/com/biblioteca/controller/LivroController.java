@@ -6,6 +6,7 @@ import java.util.Collection;
 import br.com.biblioteca.dao.AutorDao;
 import br.com.biblioteca.dao.EditoraDao;
 import br.com.biblioteca.dao.LivroDao;
+import br.com.biblioteca.exception.BibliotecaException;
 import br.com.biblioteca.modelo.Autor;
 import br.com.biblioteca.modelo.Editora;
 import br.com.biblioteca.modelo.Livro;
@@ -50,8 +51,9 @@ public class LivroController extends AbstractController {
 	
 	/**
 	 * Direciona o usuário ao formulário de cadastro de livro
+	 * @throws BibliotecaException 
 	 */
-	public void editar() {
+	public void editar() throws BibliotecaException {
 
 		Livro livro = getDao(LivroDao.class).find(getCurrentRequestObj().getEntityId());
 
@@ -69,8 +71,10 @@ public class LivroController extends AbstractController {
 	/**
 	 * Salva novo livro no banco de dados
 	 * @throws ParseException
+	 * @throws BibliotecaException 
+	 * @throws NumberFormatException 
 	 */
-	public void salvar() throws ParseException {
+	public void salvar() throws ParseException, NumberFormatException, BibliotecaException {
 
 		Autor autor = getDao(AutorDao.class).find(Integer.valueOf(getParam("id_autor")));
 		Editora editora = getDao(EditoraDao.class).find(Integer.valueOf(getParam("id_editora")));

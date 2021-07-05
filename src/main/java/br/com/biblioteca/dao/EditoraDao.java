@@ -2,22 +2,21 @@ package br.com.biblioteca.dao;
 
 import java.util.Collection;
 
-import br.com.biblioteca.arq.BancoDeDados;
+import br.com.biblioteca.exception.BibliotecaException;
 import br.com.biblioteca.modelo.Editora;
 
-public class EditoraDao implements AbstractDao {
+public class EditoraDao extends AbstractDao {
 
-	@SuppressWarnings("unchecked")
 	public Collection<Editora> findAll() {
-		return BancoDeDados.getAllEditoras();
+		return getDataBase().getAllEditoras();
 	}
 
-	public Editora find(Integer id) {
-		return BancoDeDados.findEditoraById(id);
+	public Editora find(Integer id) throws BibliotecaException {
+		return findByPrimaryKey(Editora.class, id);
 	}
 
 	public void salvar(Editora editora) {
-		BancoDeDados.cadastrarEditora(editora);
+		getDataBase().cadastrarEditora(editora);
 	}
 
 	private void atualizar(Editora editora) {
@@ -33,7 +32,7 @@ public class EditoraDao implements AbstractDao {
 	}
 
 	public void remover(int idEditora) {
-		BancoDeDados.deletarEditora(idEditora);
+		getDataBase().deletarEditora(idEditora);
 	}
 
 }

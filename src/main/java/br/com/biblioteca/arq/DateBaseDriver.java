@@ -13,21 +13,30 @@ import br.com.biblioteca.modelo.Livro;
 import br.com.biblioteca.modelo.Usuario;
 
 /**
- * Classe que simula o banco de dados
- * 
+ * Classe que simula o banco de dados (Singleton)
  * @author deyvison
- *
  */
-public class BancoDeDados {
+public class DateBaseDriver {
 
-	private static int chavePrimaria = 1;
+	private int pKey = 1;
+	private Map<Integer, Editora> editoras;
+	private Map<Integer, Livro> livros;
+	private Map<Integer, Autor> autores;
+	private Map<Integer, Endereco> enderecos;
+	private Map<Integer, Usuario> usuarios;
 
-	public static Map<Integer, Editora> editoras;
-	public static Map<Integer, Livro> livros;
-	public static Map<Integer, Autor> autores;
-	public static Map<Integer, Endereco> enderecos;
-	public static Map<Integer, Usuario> usuarios;
-
+	private static DateBaseDriver instancia;
+	
+	private DateBaseDriver() {
+		
+	}
+	
+	public static synchronized DateBaseDriver getInstance() {
+		if(instancia == null)
+			instancia = new DateBaseDriver();
+		
+		return instancia;
+	}
 	
 	
 	/**
@@ -35,27 +44,28 @@ public class BancoDeDados {
 	 * 
 	 * @param autor
 	 */
-	public static void cadastrarAutor(Autor autor) {
+	public void cadastrarAutor(Autor autor) {
 		if (autores == null)
 			autores = new HashMap<>();
 
 		if(autor.getId() <= 0)
-			autor.setId(chavePrimaria++);
+			autor.setId(pKey++);
 		
 		autores.put(autor.getId(), autor);
 	}
 
-	public static Collection<Autor> getAllAutores() {
+	public Collection<Autor> getAllAutores() {
 		return autores.values();
 	}
 
-	public static Autor findAutorById(Integer id) {
+	public Autor findAutorById(Integer id) {
 		return autores.get(id);
 	}
 
-	public static void deletarAutor(Integer idAutor) {
+	public void deletarAutor(Integer idAutor) {
 		autores.remove(idAutor);
 	}
+	
 	
 	
 	/**
@@ -63,99 +73,100 @@ public class BancoDeDados {
 	 * 
 	 * @param livro
 	 */
-	public static void cadastrarLivro(Livro livro) {
+	public void cadastrarLivro(Livro livro) {
 		if (livros == null)
 			livros = new HashMap<>();
 
 		if(livro.getId() <= 0)
-			livro.setId(chavePrimaria++);
+			livro.setId(pKey++);
 		
 		livros.put(livro.getId(), livro);
 	}
 
-	public static Collection<Livro> getAllLivros() {
+	public Collection<Livro> getAllLivros() {
 		return livros.values();
 	}
 	
-	public static void deletarLivro(Integer idLivro) {
+	public void deletarLivro(Integer idLivro) {
 		livros.remove(idLivro);
 	}
 	
-	public static Livro findLivroById(Integer id) {
+	public Livro findLivroById(Integer id) {
 		return livros.get(id);
 	}
+	
 	
 	/**
 	 * ######################################## Endereço
 	 * 
 	 * @param endereco
 	 */
-	public static void cadastrarEndereco(Endereco endereco) {
+	public void cadastrarEndereco(Endereco endereco) {
 		if (enderecos == null)
 			enderecos = new HashMap<>();
 
 		if(endereco.getId() <= 0)
-			endereco.setId(chavePrimaria++);
+			endereco.setId(pKey++);
 		
 		enderecos.put(endereco.getId(), endereco);
 	}
 	
-	public static Collection<Endereco> getAllEnderecos() {
+	public Collection<Endereco> getAllEnderecos() {
 		return enderecos.values();
 	}
 
-	public static void deletarEndereco(Integer idEndereco) {
+	public void deletarEndereco(Integer idEndereco) {
 		enderecos.remove(idEndereco);
 	}
 	
-	public static Endereco findEnderecoById(Integer id) {
+	public Endereco findEnderecoById(Integer id) {
 		return enderecos.get(id);
 	}
+	
 	
 	/**
 	 * ####################################### Editora
 	 * 
 	 * @param editora
 	 */
-	public static void cadastrarEditora(Editora editora) {
+	public void cadastrarEditora(Editora editora) {
 		if (editoras == null)
 			editoras = new HashMap<>();
 
 		if(editora.getId() <= 0)
-			editora.setId(chavePrimaria++);
+			editora.setId(pKey++);
 		
 		editoras.put(editora.getId(), editora);
 	}
 	
-	public static Collection<Editora> getAllEditoras() {
+	public Collection<Editora> getAllEditoras() {
 		return editoras.values();
 	}
 	
-	public static Editora findEditoraById(Integer id) {
+	public Editora findEditoraById(Integer id) {
 		return editoras.get(id);
 	}
 	
-	public static void deletarEditora(Integer idEditora) {
+	public void deletarEditora(Integer idEditora) {
 		editoras.remove(idEditora);
 	}
-	
 	
 	
 	/**
 	 * #########################################   Usuários
 	 * 
 	 */
-	public static void cadastrarUsuario(Usuario usuario) {
+	public void cadastrarUsuario(Usuario usuario) {
 		if (usuarios == null)
 			usuarios = new HashMap<>();
 
 		if(usuario.getId() <= 0)
-			usuario.setId(chavePrimaria++);
+			usuario.setId(pKey++);
 		
 		usuarios.put(usuario.getId(), usuario);
 	}
 
-	public static Usuario findUserByLoginAndPass(String login, String senha) {
+	public Usuario findUserByLoginAndPass(String login, String senha) {
 		for(Integer idUser : usuarios.keySet()) {
 			Usuario usuario = usuarios.get(idUser);
 			
@@ -164,9 +175,7 @@ public class BancoDeDados {
 		}
 		
 		return null;
-	}
-	
-
+	}		
 	
 	
 	/**
@@ -209,14 +218,12 @@ public class BancoDeDados {
 		usuario.setSenha("admin");
 		usuario.setNome("Administrador do Sistema"); 		
 		
-
-		BancoDeDados.cadastrarUsuario(usuario);
-		BancoDeDados.cadastrarLivro(livro);
-		BancoDeDados.cadastrarAutor(autor);
-		BancoDeDados.cadastrarEditora(editora);
-		BancoDeDados.cadastrarEndereco(endereco);
-		BancoDeDados.cadastrarEndereco(enderecoEditora);
-
+		DateBaseDriver bancoDeDados = DateBaseDriver.getInstance();
+		bancoDeDados.cadastrarUsuario(usuario);
+		bancoDeDados.cadastrarLivro(livro);
+		bancoDeDados.cadastrarAutor(autor);
+		bancoDeDados.cadastrarEditora(editora);
+		bancoDeDados.cadastrarEndereco(endereco);
+		bancoDeDados.cadastrarEndereco(enderecoEditora);
 	}
-
 }

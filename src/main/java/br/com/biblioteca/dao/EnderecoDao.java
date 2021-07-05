@@ -2,27 +2,26 @@ package br.com.biblioteca.dao;
 
 import java.util.Collection;
 
-import br.com.biblioteca.arq.BancoDeDados;
+import br.com.biblioteca.exception.BibliotecaException;
 import br.com.biblioteca.modelo.Autor;
 import br.com.biblioteca.modelo.Endereco;
 
-public class EnderecoDao implements AbstractDao {
-	
-	@SuppressWarnings("unchecked")
+public class EnderecoDao extends AbstractDao {
+
 	public Collection<Autor> findAll() {
-		return BancoDeDados.getAllAutores();
+		return getDataBase().getAllAutores();
 	}
 
-	public Endereco find(Integer id) {
-		return BancoDeDados.findEnderecoById(id);
+	public Endereco find(Integer id) throws BibliotecaException {
+		return findByPrimaryKey(Endereco.class, id);
 	}
 
 	public void remover(Integer idEndereco) {
-		BancoDeDados.deletarEndereco(idEndereco);
+		getDataBase().deletarEndereco(idEndereco);
 	}
 
 	public void salvar(Autor obj) {
-		BancoDeDados.cadastrarAutor(obj);
+		getDataBase().cadastrarAutor(obj);
 	}
 
 }
